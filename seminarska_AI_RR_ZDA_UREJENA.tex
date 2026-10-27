@@ -1,0 +1,453 @@
+\documentclass[12pt,a4paper]{article}
+
+% -------------------------------------------------
+% OSNOVNE NASTAVITVE
+% -------------------------------------------------
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[slovene]{babel}
+\usepackage{lmodern}
+\usepackage[a4paper,margin=2.5cm]{geometry}
+\usepackage{setspace}
+\onehalfspacing
+
+\usepackage{amsmath,amssymb}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{tabularx}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{caption}
+\usepackage{url}
+\usepackage[hidelinks]{hyperref}
+\usepackage{csquotes}
+
+% Grafi neposredno iz CSV
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+
+% Literatura
+\usepackage[
+    backend=biber,
+    style=authoryear,
+    sorting=nyt,
+    uniquename=false,
+    uniquelist=false
+]{biblatex}
+\addbibresource{viri.bib}
+
+% -------------------------------------------------
+% PODATKI O NALOGI
+% -------------------------------------------------
+\title{\textbf{Umetna inteligenca kot vir R\&R in dolgoročne gospodarske rasti:}\\
+ZDA v obdobju 2010--2025}
+\author{
+Andraž Ajdovec \and Tin Cvek \and Jan Hrovat \and Miha Ručigaj
+}
+\date{oktober 2026}
+
+\begin{document}
+
+\maketitle
+\thispagestyle{empty}
+
+\vfill
+\begin{center}
+Predmet: Makroekonomija\\
+Seminarska naloga\\
+Univerza v Ljubljani, Fakulteta za matematiko in fiziko\\
+Mentor: \textit{Jan Grobovšek}
+\end{center}
+\vfill
+
+\newpage
+\tableofcontents
+\newpage
+
+
+
+% =================================================
+\section{Uvod}\label{sec:uvod}
+% =================================================
+
+\subsection{Širši okvir in pomen problematike}
+Gospodarska rast je razmeroma nov pojav, ki se je izrazito pospešil okoli leta 1800 v Zahodni Evropi in njenih izpeljankah, med katere spadajo tudi ZDA \parencite[pros.~3]{grobovsek2026}. Dinamiko vodilnih industrijskih držav, kot sta Združeno kraljestvo in ZDA, lahko v zadnjih dveh stoletjih v logaritmih približamo z ravno črto, kar pomeni približno konstantno povprečno stopnjo rasti \parencite[pros.~5]{grobovsek2026}. Že majhne razlike v tej stopnji so pomembne: ena odstotna točka višja rast v štiridesetih letih pomeni približno 49~\% višjo raven dohodka na prebivalca \parencite[str.~4]{polanec_rast}, zato so koristi višje dolgoročne rasti bistveno večje od koristi odprave kratkoročnih nihanj \parencite[str.~56]{garin2021}.
+
+Osrednji model za razumevanje rasti je Solowov model. Njegova ključna implikacija je, da je dolgoročna stopnja rasti BDP na delavca enaka stopnji tehnološkega napredka in da je tehnologija edini vir dolgoročne rasti dohodka na delavca \parencite[pros.~59]{grobovsek2026}. Tehnologijo oziroma produktivnost razumemo kot zalogo idej, ki so nerivalni proizvodni dejavnik; med primeri idej predavanje navaja tudi vrednosti parametrov v nevronski mreži \parencite[pros.~115--117]{grobovsek2026}. Ideje nastajajo z investicijami v raziskave in razvoj (R\&R) \parencite[pros.~124]{grobovsek2026}. Za ZDA ocene kažejo, da je družbena donosnost izdatkov za R\&R, ki znašajo okoli 2,7~\% BDP, zelo visoka (Jones in Summers, 2020, povzeto po \cite[pros.~131]{grobovsek2026}).
+
+Umetna inteligenca (UI) je zato za teorijo rasti zanimiva iz dveh razlogov. Po eni strani nekateri ekonomisti, npr.\ Gordon (2016), ocenjujejo, da postaja vse težje ustvarjati nove prodorne ideje, saj je rast produktivnosti v ZDA kljub hitremu povečevanju števila raziskovalcev ostala približno nespremenjena (Bloom in sod., 2020, povzeto po \cite[pros.~136--137]{grobovsek2026}). Po drugi strani predavanje UI uvršča med makro inovacije, ki se šele zares začenjajo, nekateri pa celo menijo, da bi lahko UI človeka nadomestila v raziskovalni dejavnosti \parencite[pros.~139]{grobovsek2026}. Zasebne naložbe v UI so v ZDA leta 2024 dosegle 109,1 milijarde USD, delež organizacij po svetu, ki poročajo o uporabi UI, pa se je v enem letu povečal s 55~\% na 78~\% \parencite{aiindex2025}. Ali bo UI prinesla le enkraten dvig ravni proizvodnje ali trajno višjo rast, je eno ključnih vprašanj sodobne makroekonomije.
+
+\subsection{Predstavitev izbranega primera: ZDA v obdobju 2010--2025}
+Za empirični del smo izbrali ZDA iz treh razlogov. Prvič, so gospodarstvo z največjim obsegom R\&R: skupni izdatki za R\&R so leta 2023 znašali 939,6 milijarde USD \parencite[tab.~DISC-1]{nsb2025}. Drugič, v ZDA so bile zasebne naložbe v UI leta 2024 skoraj dvanajstkrat večje kot na Kitajskem \parencite{aiindex2025}. Tretjič, ZDA so na tehnološki meji. Produktivnost gospodarstva lahko razčlenimo na svetovno mejno tehnologijo in učinkovitost, s katero jo gospodarstvo uporablja; prva je vir dolgoročne rasti, druga pa določa raven \parencite[pros.~119--120]{grobovsek2026}. Pri gospodarstvu na meji zato rast produktivnosti v veliki meri odraža rast mejne tehnologije.
+
+Obdobje 2010--2025 zajame izhodiščna leta pred širšo uporabo UI in leta njenega hitrega razmaha; generativna UI se je množično razširila po izidu orodja ChatGPT konec leta 2022. Obdobje razdelimo na tri podobdobja (2010--2014, 2015--2019 in 2020--2025), kar je razdelitev za potrebe primerjave in ne zgodovinska periodizacija razvoja UI. Zadnje podobdobje zaznamuje pandemija, serije o R\&R in UI-patentih pa se končajo leta 2023.
+
+\subsection{Raziskovalno vprašanje}\label{sec:rv}
+\noindent\textbf{Raziskovalno vprašanje:} Ali je rast produktivnosti v ZDA v obdobju 2010--2025, ko so se povečala vlaganja v raziskave in razvoj ter umetno inteligenco, skladna s Solowovim modelom, po katerem višja vlaganja zvišajo raven proizvodnje, trajno višjo rast pa prinese le hitrejši tehnološki napredek?
+
+Vprašanje razdelimo na tri podvprašanja:
+\begin{enumerate}
+    \item Ali so se vlaganja v R\&R in UI povečala?
+    \item Kolikšen del rasti BDP na uro dela pojasnijo razmerje med kapitalom in BDP, človeški kapital in produktivnost?
+    \item Ali se je rast produktivnosti povečala, kar bi po modelu pomenilo trajno višjo rast, ali gre le za prehodni učinek?
+\end{enumerate}
+
+Za odgovor uporabimo Solowov model z rastjo prebivalstva in tehnologije, ki ga v poglavju~\ref{sec:teorija} najprej teoretično predstavimo, v poglavju~\ref{sec:uporaba} pa ga z računovodsko razčlenitvijo rasti iz predavanj uporabimo na podatkih za tri podobdobja. Vzročnosti ne dokazujemo, temveč preverjamo, ali so podatki skladni z napovedmi modela.
+
+\subsection{Struktura naloge}
+V poglavju~\ref{sec:podatki} predstavimo podatke o izdatkih za R\&R, vlaganjih v UI, UI-patentih in produktivnosti v ZDA. V poglavju~\ref{sec:teorija} predstavimo predpostavke, enačbe in uravnoteženo rast Solowovega modela, njegovo računovodsko razčlenitev ter tri možne učinke UI v modelu s številčno simulacijo. V poglavju~\ref{sec:uporaba} model uporabimo na treh podobdobjih in napovedi primerjamo s podatki. V poglavju~\ref{sec:zakljucek} odgovorimo na raziskovalno vprašanje in kritično presodimo ugotovitve.
+
+% =================================================
+\section{Podatkovna analiza}\label{sec:podatki}
+% =================================================
+
+V tem poglavju s podatki za ZDA v obdobju 2010--2025 analiziramo vlaganja v R\&R in UI, nastajanje nove tehnologije in rast produktivnosti.
+
+\subsection{Viri podatkov in izbor spremenljivk}
+
+Uporabimo pet skupin kazalnikov. Vlaganja v R\&R merimo s skupnimi izdatki ZDA za R\&R v tekočih in stalnih cenah iz serije \emph{National Patterns of R\&D Resources}, ki jo NCSES objavlja v okviru poročila \emph{Science and Engineering Indicators} \parencite[tab.~DISC-1]{nsb2025}, ter z njihovim deležem v BDP, ki ga izračunamo s podatki BEA o nominalnem BDP \parencite{fredgdp}. Javna vlaganja v UI spremljamo s podatki programa NITRD o federalnih ne-obrambnih izdatkih za UI R\&R \parencites{nitrd2021}{nitrd2025}, zasebna vlaganja in razširjenost uporabe UI pa s poročilom AI Index \parencite{aiindex2025}. Kot kazalnik nastajanja nove tehnologije uporabimo patentne prijave, ki jih podatkovni niz USPTO AIPD prepozna kot povezane z UI \parencite{pairolero2025}. Produktivnost merimo s podatki U.S. Bureau of Labor Statistics (BLS) za zasebni nekmetijski poslovni sektor: z BDP na uro dela, skupno faktorsko produktivnostjo (TFP), rastjo realnega outputa, vložka kapitala in sestave delovne sile \parencites{fredtfp}{bls2026tfp}.
+
+\begin{table}[H]
+\centering
+\caption{Kazalniki, uporabljeni v empirični analizi}\label{tab:kazalniki}
+\small
+\begin{tabularx}{\textwidth}{>{\raggedright\arraybackslash}p{3.0cm} >{\raggedright\arraybackslash}X >{\centering\arraybackslash}p{2.4cm} >{\centering\arraybackslash}p{2.3cm}}
+\toprule
+\textbf{Koncept} & \textbf{Kazalnik} & \textbf{Obdobje} & \textbf{Vir} \\
+\midrule
+Vlaganja v R\&R & Izdatki za R\&R v tekočih in stalnih cenah; delež v BDP & 2010--2023 & NSB/NCSES, BEA \\
+Javni UI R\&R & Federalni ne-obrambni izdatki za UI R\&R & FY2020--FY2025 & NITRD \\
+Zasebna UI & Zasebne naložbe v UI; delež organizacij, ki uporabljajo UI & 2023--2024 & AI Index \\
+Nova tehnologija & UI-patentne prijave & 2018--2023 & USPTO \\
+Produktivnost & BDP na uro dela, TFP, realni output, vložek kapitala, sestava delovne sile & 2010--2025 & BLS \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\subsection{Metoda analize}
+
+Empirični del temelji na opisni analizi časovnih vrst. Pri vsakem kazalniku prikažemo gibanje skozi čas in primerjamo podobdobja 2010--2014, 2015--2019 in 2020--2025. Rast v podobdobju izračunamo kot povprečno letno (geometrijsko) stopnjo rasti med zadnjim letom prejšnjega in zadnjim letom tekočega podobdobja (npr. 2014--2019). Manjkajočih vrednosti ne interpoliramo, vsako serijo pa vzamemo iz ene same izdaje vira. Denarne spremenljivke prikazujemo v tekočih in stalnih cenah, delež izdatkov za R\&R v BDP pa pokaže spremembo dela stopnje investiranja $s$ v modelu (razdelek~\ref{sec:uporabamodela}). Opisna analiza omogoča preverjanje skladnosti podatkov z modelom, ne pa dokazovanja vzročnosti.
+
+\subsection{Razvoj izdatkov za raziskave in razvoj}
+
+Za skupne izdatke uporabimo serijo NCSES za obdobje 2010--2023 iz izdaje 2022--23 \parencite[tab.~DISC-1]{nsb2025}.
+
+\begin{figure}[H]
+\centering
+\begin{minipage}{0.49\textwidth}
+\centering
+\begin{tikzpicture}
+\begin{axis}[
+    width=\linewidth,
+    height=5.5cm,
+    xlabel={Leto},
+    ylabel={mrd USD},
+    grid=major,
+    xtick={2010,2013,2016,2019,2022},
+    xticklabel={\pgfmathprintnumber[fixed,precision=0,1000 sep={}]{\tick}},
+    tick label style={font=\footnotesize},
+    label style={font=\footnotesize},
+    legend pos=north west,
+    legend style={font=\footnotesize}
+]
+\addplot+[mark=*,mark size=1.2pt] table[x=leto,y expr=\thisrow{skupaj_mio_usd}/1000,col sep=comma]{podatki_rnd_usa.csv};
+\addlegendentry{tekoče cene}
+\addplot+[mark=square*,mark size=1.2pt] table[x=leto,y expr=\thisrow{realno_mio_usd_2017}/1000,col sep=comma]{podatki_rnd_usa.csv};
+\addlegendentry{stalne cene 2017}
+\end{axis}
+\end{tikzpicture}
+\end{minipage}\hfill
+\begin{minipage}{0.49\textwidth}
+\centering
+\begin{tikzpicture}
+\begin{axis}[
+    width=\linewidth,
+    height=5.5cm,
+    xlabel={Leto},
+    ylabel={Delež v BDP (\%)},
+    grid=major,
+    xtick={2010,2013,2016,2019,2022},
+    xticklabel={\pgfmathprintnumber[fixed,precision=0,1000 sep={}]{\tick}},
+    yticklabel style={/pgf/number format/fixed,/pgf/number format/precision=1},
+    tick label style={font=\footnotesize},
+    label style={font=\footnotesize}
+]
+\addplot+[mark=*,mark size=1.2pt] table[x=leto,y=delez_bdp,col sep=comma]{podatki_rnd_usa.csv};
+\end{axis}
+\end{tikzpicture}
+\end{minipage}
+\caption{Izdatki za R\&R v ZDA, 2010--2023: levo v tekočih in stalnih cenah, desno kot delež BDP}
+\caption*{\footnotesize Vir: \cite[tab.~DISC-1]{nsb2025}; \cite{fredgdp}; lastni izračun.}
+\label{fig:rnd}
+\end{figure}
+
+Nominalni izdatki za R\&R so se povečali s 406,6 milijarde USD leta 2010 na 939,6 milijarde USD leta 2023, v stalnih cenah iz leta 2017 pa s 453,6 na 768,4 milijarde USD, kar je 69~\% oziroma 4,1~\% na leto \parencite[tab.~DISC-1]{nsb2025}. Delež izdatkov za R\&R v BDP je bil do leta 2015 skoraj nespremenjen pri okoli 2,7~\%, kar ustreza vrednosti iz predavanj \parencite[pros.~131]{grobovsek2026}, nato pa je naraščal in leta 2023 dosegel 3,38~\% (lastni izračun). V povprečju podobdobij je znašal 2,70~\%, 2,86~\% in 3,37~\% (2020--2023), torej se je med prvim in zadnjim podobdobjem povečal za 0,67 odstotne točke BDP. Večino ameriškega R\&R izvaja in financira poslovni sektor: leta 2023 je izvajal 78~\% in financiral 75~\% vseh izdatkov \parencite[tab.~DISC-1]{nsb2025}.
+
+\subsection{Federalna in zasebna vlaganja v UI}
+
+NITRD objavlja federalna ne-obrambna vlaganja v UI R\&R in razlikuje med postavko \emph{Core UI}, ki zajema raziskave, pri katerih je UI neposredni predmet (npr. strojno učenje, računalniški vid, jezikovni algoritmi in arhitekture nevronskih mrež), in širšim seštevkom z dejavnostmi drugih programskih področij s pomembno komponento UI \parencite{nitrd2025}. Razlikovati je treba med dejansko porabo, odobrenimi sredstvi in proračunskimi zahtevami.
+
+\begin{table}[H]
+\centering
+\caption{Federalni ne-obrambni izdatki za UI R\&R}
+\small
+\begin{tabular}{lrr}
+\toprule
+\textbf{Fiskalno leto} & \textbf{Core UI (mio USD)} & \textbf{Skupaj (mio USD)} \\
+\midrule
+FY2020 dejansko & 797,5 & 1.426,0 \\
+FY2021 odobreno & 954,9 & 1.534,4 \\
+FY2023 dejansko & 1.914,2 & 3.121,9 \\
+FY2024 odobreno & 1.789,0 & 2.977,5 \\
+FY2025 zahteva & 1.954,5 & 3.316,1 \\
+\bottomrule
+\end{tabular}
+\caption*{\footnotesize Vir: \cite{nitrd2021}; \cite{nitrd2025}; lastna priprava. Za FY2022 v uporabljenih virih ni primerljive vrednosti.}
+\label{tab:UI-rd}
+\end{table}
+
+Dejanska poraba se je med FY2020 in FY2023 povečala s 1,43 na 3,12 milijarde USD, torej se je več kot podvojila; vrednosti za FY2025 ne interpretiramo kot realizirano porabo. Kljub hitri rasti so federalna vlaganja v UI majhna: 3,12 milijarde USD je približno 0,3~\% vseh izdatkov za R\&R v ZDA leta 2023. Bistveno večja so zasebna vlaganja: zasebne naložbe v UI so v ZDA leta 2024 dosegle 109,1 milijarde USD, delež organizacij, ki poročajo o uporabi UI, pa se je med letoma 2023 in 2024 povečal s 55~\% na 78~\% \parencite{aiindex2025}. Zasebne naložbe niso enake izdatkom za R\&R, saj vključujejo tudi naložbe v podjetja in infrastrukturo, zato jih z drugimi serijami ne seštevamo.
+
+\subsection{Nova tehnologija: UI-patenti}
+
+Podatkovni niz USPTO AIPD za ameriške patentne dokumente (podeljene patente in objavljene prijave) z metodami strojnega učenja oceni verjetnost, da vsebujejo tehnologijo UI. Letno število UI-patentnih prijav v ZDA se je povečalo s približno 76.000 leta 2018 na nekaj več kot 101.000 leta 2023, torej za 33~\% oziroma približno 6~\% na leto, prijave s področja strojnega učenja pa z okoli 12.000 na skoraj 29.000 (za 142~\%) \parencite{pairolero2025}. Patenti niso popolna mera inovacij, saj vse ideje niso patentirane, patenti se močno razlikujejo po pomenu, niz pa zajema tudi tuje prijavitelje. Patent je hkrati mehanizem izključljivosti, ki inovatorju omogoča monopolno rento in s tem spodbuja vlaganja v nove ideje \parencite[pros.~124--126]{grobovsek2026}.
+
+\subsection{Razvoj produktivnosti}
+
+BLS definira TFP kot razmerje med indeksom realnega outputa in indeksom kombiniranih vložkov dela in kapitala, pri čemer v kapital vključuje tudi intelektualno lastnino, med njo izdatke za R\&R in programsko opremo \parencite{bls2026tfp}. Letne stopnje rasti izračunamo iz indeksov BLS iz izdaje marca 2026 \parencite{fredtfp}.
+
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}
+\begin{axis}[
+    width=0.94\textwidth,
+    height=5.5cm,
+    xlabel={Leto},
+    ylabel={Rast TFP (\%)},
+    grid=major,
+    xtick=data,
+    xticklabel={\pgfmathprintnumber[fixed,precision=0,1000 sep={}]{\tick}},
+    xticklabel style={rotate=45,anchor=east},
+    scaled y ticks=false
+]
+\addplot+[mark=*] table[x=leto,y=tfp_rast,col sep=comma]{podatki_tfp_usa.csv};
+\end{axis}
+\end{tikzpicture}
+\caption{Letna rast TFP v zasebnem nekmetijskem poslovnem sektorju ZDA, 2010--2025}
+\caption*{\footnotesize Vir: \cite{fredtfp}; lastni izračun.}
+\label{fig:tfp}
+\end{figure}
+
+Gibanje TFP je precej bolj volatilno kot gibanje izdatkov za R\&R. Visoka rast leta 2010 (2,6~\%) je predvsem odboj po recesiji leta 2009, v letih 2011--2019 pa so se letne stopnje gibale med $-0{,}3$ in 1,3~\%. Pandemija je povzročila velika nihanja: po padcu leta 2020 je leta 2021 sledil skok za 3,9~\%, leta 2022 padec za 1,1~\%, v letih 2023 in 2024 pa rast za 1,6 in 1,5~\%. BLS za poslovni cikel 2019--2025 poroča o 1,0-odstotni povprečni letni rasti TFP, za cikel 2007--2019 o 0,6-odstotni in za cikel 2000--2007 o 1,3-odstotni \parencite{bls2026tfp}.
+
+BDP na uro dela je v treh podobdobjih rasel po 1,10~\%, 1,44~\% in 2,23~\% na leto, torej vse hitreje (lastni izračun iz indeksa) \parencite{fredtfp}. Realni output je rasel po 2,96~\%, 3,10~\% in 2,71~\%, vložek kapitala po 2,00~\%, 2,98~\% in 2,62~\%, kazalnik sestave delovne sile pa po 0,36~\%, 0,40~\% in 0,56~\% na leto; slednji je leta 2020 poskočil za 2,8~\% \parencite{fredtfp}. Te podatke v poglavju~\ref{sec:uporaba} uporabimo za razčlenitev rasti.
+
+\subsection{Povzetek podatkovne analize}
+
+Vlaganja v R\&R so se povečala: delež v BDP je med prvim in zadnjim podobdobjem narasel za 0,67 odstotne točke, federalna vlaganja v UI so se v treh letih več kot podvojila, UI-patentne prijave pa so se med letoma 2018 in 2023 povečale za tretjino. BDP na uro dela je rasel vse hitreje, rast TFP pa je bila v drugem podobdobju nižja kot v prvem in v zadnjem najvišja, vendar zaznamovana s pandemskimi nihanji. Ali je to skladno s Solowovim modelom, preverimo v poglavjih~\ref{sec:teorija} in~\ref{sec:uporaba}.
+
+% =================================================
+\section{Teoretični okvir: Solowov model}\label{sec:teorija}
+% =================================================
+Za analizo uporabimo Solowov model, ki temelji na prispevkih Solowa (1956) in Swana (1956) in uvaja minimalno teoretično strukturo, ki jo je mogoče empirično preveriti \parencite[pros.~12]{grobovsek2026}. Je temelj celotne teorije gospodarske rasti \parencite[pros.~39]{grobovsek2026} ter osrednji model rasti v zapiskih in učbeniku \parencites[str.~9--18]{polanec_rast}[pogl.~5--6]{garin2021}. Uporabimo različico z rastjo prebivalstva in tehnologije, saj osnovni Solowov model dolgoročne rasti ne predvideva \parencite[pros.~51]{grobovsek2026}. Model dopolnimo z računovodsko razčlenitvijo rasti iz predavanj, ki iz iste proizvodne funkcije izpelje formalni merilni okvir \parencite[pros.~64--81]{grobovsek2026}. Model tako pokrije oba tipa modelov iz navodil.
+
+\subsection{Predpostavke modela}\label{sec:predpostavke}
+\begin{itemize}
+    \item \textbf{Diskreten čas in reprezentativni subjekti:} čas teče v obdobjih $t=1,2,3,\ldots$, gospodarstvo pa sestavljata reprezentativno podjetje in reprezentativno gospodinjstvo \parencite[pros.~15]{grobovsek2026}.
+    \item \textbf{Neoklasična proizvodna funkcija:} je naraščajoča in konkavna v vsakem dejavniku, ima konstantne donose obsega v $K$ in $L$ ter izpolnjuje Inadine pogoje; poenostavimo jo s Cobb--Douglasovo obliko z delo povečujočo produktivnostjo $A$ \parencites[pros.~16]{grobovsek2026}[str.~10--12]{polanec_rast}.
+    \item \textbf{Popolna konkurenca:} podjetje najema kapital in delo na konkurenčnih trgih, zato sta donosnost kapitala in plača enaki mejnima produktoma, delež kapitala v dohodku pa je enak $\alpha$ \parencite[pros.~17,~78]{grobovsek2026}.
+    \item \textbf{Eksogena stopnja varčevanja:} gospodinjstvo ničesar ne optimizira; varčuje eksogen delež $s\in(0,1)$ dohodka, preostanek pa potroši \parencites[pros.~18]{grobovsek2026}[str.~5]{garin2021}.
+    \item \textbf{Zaprto gospodarstvo in neelastična ponudba dela:} investicije so enake varčevanju, ponudba dela je enaka povpraševanju \parencites[pros.~19,~21]{grobovsek2026}[str.~9]{polanec_rast}.
+    \item \textbf{Eksogena rast prebivalstva in tehnologije:} delo raste po stopnji $n$, produktivnost po stopnji $g$, kapital se amortizira po stopnji $\delta$ \parencite[pros.~19,~52]{grobovsek2026}.
+\end{itemize}
+
+\subsection{Osnovne enačbe}\label{sec:enacbe}
+Proizvodnja je
+\begin{equation}\label{eq:prod}
+Y_t=K_t^{\alpha}(A_tL_t)^{1-\alpha},
+\end{equation}
+kjer $A$ interpretiramo kot produktivnost, ki povečuje učinkovitost dela \parencite[pros.~16]{grobovsek2026}. Gospodinjstvo varčuje $S_t=sY_t$, investicije so enake prihrankom, $I_t=S_t$, kapital pa se kopiči po enačbi \parencite[pros.~19--21]{grobovsek2026}
+\begin{equation}\label{eq:akum}
+K_{t+1}=(1-\delta)K_t+sY_t .
+\end{equation}
+Prebivalstvo in tehnologija rasteta po konstantnih stopnjah, $L_t=L_1(1+n)^{t-1}$ in $A_t=A_1(1+g)^{t-1}$ \parencite[pros.~52]{grobovsek2026}. Ker v takem gospodarstvu ustaljeno stanje kapitala ne obstaja, sistem zapišemo s kapitalom na enoto učinkovitega dela $\tilde k_t\equiv K_t/(A_tL_t)$ \parencite[pros.~53--54]{grobovsek2026}:
+\begin{equation}\label{eq:ktilde}
+\tilde k_{t+1}=\frac{(1-\delta)\tilde k_t+s\,\tilde k_t^{\alpha}}{(1+g)(1+n)} .
+\end{equation}
+Proizvodnja na enoto učinkovitega dela je $\tilde y_t\equiv Y_t/(A_tL_t)=\tilde k_t^{\alpha}$ \parencite[pros.~57]{grobovsek2026}. Ko je $\tilde k_t$ manjši od ustaljene vrednosti, $\tilde k_t$ raste in $K$ ter $Y$ rasteta hitreje kot $AL$; ko je večji, rasteta počasneje \parencite[pros.~56--57]{grobovsek2026}. Razlog je padajoči mejni produkt kapitala: vsaka dodatna enota kapitala ima vse manjši vpliv na proizvodnjo in s tem na investicije, dokler se investicije ne izenačijo z amortizacijo \parencite[pros.~31]{grobovsek2026}.
+
+\subsection{Uravnotežena rast}\label{sec:bgp}
+Na uravnoteženi poti rasti je $\tilde k_{t+1}=\tilde k_t=\tilde k^{\star}$. Iz enačbe~\eqref{eq:ktilde} sledi \parencite[pros.~55,~58]{grobovsek2026}
+\begin{equation}\label{eq:bgp}
+\tilde k^{\star}=\left(\frac{s}{g+n+gn+\delta}\right)^{\frac{1}{1-\alpha}},\qquad
+y^{\star}_t=\frac{Y^{\star}_t}{L_t}=A_t\left(\frac{s}{g+n+gn+\delta}\right)^{\frac{\alpha}{1-\alpha}} .
+\end{equation}
+BDP na delavca se torej dolgoročno spreminja le, če se spreminja $A_t$, zato raste s stopnjo tehnološkega napredka $g$. Edini vir dolgoročne rasti dohodka na delavca je tehnologija \parencites[pros.~59]{grobovsek2026}[str.~13]{polanec_rast}. Stopnja varčevanja $s$, amortizacija $\delta$ in delež $\alpha$ določajo le dolgoročno \emph{raven} BDP na delavca, ne njegove stopnje rasti; konvergenca zaradi kopičenja kapitala je prehoden pojav \parencites[pros.~61]{grobovsek2026}[str.~126--127]{garin2021}. Na uravnoteženi poti je razmerje med kapitalom in BDP konstantno:
+\begin{equation}\label{eq:ky}
+\frac{K}{Y}=\frac{\tilde k^{\star}}{\tilde y^{\star}}=\frac{s}{g+n+gn+\delta},
+\end{equation}
+in ni odvisno od $A$ \parencite[pros.~77]{grobovsek2026}.
+
+\textbf{Primer.} Vzemimo parametre iz numeričnega primera na predavanjih, $\delta=0{,}06$, $\alpha=0{,}33$ in $s=0{,}2$ \parencite[pros.~40]{grobovsek2026}, ter vrednosti $g=2~\%$ in $n=1~\%$, ki po zapiskih približno ustrezajo ZDA \parencite[str.~18]{polanec_rast}. Po enačbi~\eqref{eq:ky} je $K/Y=0{,}2/(0{,}02+0{,}01+0{,}0002+0{,}06)\approx2{,}2$ (lastni izračun). To se ujema s Kaldorjevim dejstvom, da je razmerje med kapitalom in outputom skoraj konstantno in znaša okoli 2,2 \parencite[str.~9]{polanec_rast}; učbenik za ZDA navaja razmerje med 3 in 3,5, ki je v obdobju 1950--2011 približno konstantno \parencite[str.~61--62]{garin2021}.
+
+\subsection{Računovodska razčlenitev rasti}\label{sec:racunovodstvo}
+Za merjenje uporabimo razčlenitev iz predavanj. BDP je proizveden s funkcijo $Y=K^{\alpha}(ALh)^{1-\alpha}$, kjer je $h$ povprečni človeški kapital delavca. Na delavca lahko to zapišemo na dva načina \parencite[pros.~65,~77]{grobovsek2026}:
+\begin{equation}\label{eq:razclenitev}
+y=A^{1-\alpha}k^{\alpha}h^{1-\alpha}
+\qquad\text{oziroma}\qquad
+y=A\left(\frac{k}{y}\right)^{\frac{\alpha}{1-\alpha}}h ,
+\end{equation}
+kjer sta $y=Y/L$ in $k=K/L$. Predavanje priporoča drugi zapis, ker kapital na delavca $k$ ni eksogen, saj je odvisen od $A$; Solowov model pa napove dolgoročno vrednost razmerja $k/y=K/Y$, ki od $A$ ni odvisna \parencite[pros.~77]{grobovsek2026}. Z logaritmiranjem in časovno razliko drugega zapisa dobimo razčlenitev stopnje rasti (lastna izpeljava):
+\begin{equation}\label{eq:rast}
+g_y=g_A+\frac{\alpha}{1-\alpha}\,g_{K/Y}+g_h .
+\end{equation}
+Pri $\alpha=1/3$, kar ustreza povprečnemu dohodkovnemu deležu kapitala \parencites[pros.~78]{grobovsek2026}[str.~9,~23]{polanec_rast}, je $\alpha/(1-\alpha)=0{,}5$. Na uravnoteženi poti je $g_{K/Y}=0$, zato je $g_y=g+g_h$. Produktivnost $A$ izmerimo kot ostanek. Ker je $A^{1-\alpha}$ skupna faktorska produktivnost, velja $g_A\approx g_{\mathrm{TFP}}/(1-\alpha)$, kar uporabimo kot kontrolo z uradno TFP \parencites[pros.~16]{grobovsek2026}[str.~142]{garin2021}. Ostanek vsebuje tudi napake merjenja kakovosti dela in kapitala \parencite[str.~23--24]{polanec_rast} ter vpliv institucij, odprtosti in drugih dejavnikov \parencites[str.~8]{polanec_rast}[str.~144--145]{garin2021}.
+
+\subsection{Uporaba modela na UI ter R\&R}\label{sec:uporabamodela}
+UI v modelu ne nastopa neposredno, zato jo vključimo kot spremembo parametrov, podobno kot predavanje v numeričnih primerih spreminja $A$, $s$ in $L$ \parencites[pros.~45--48]{grobovsek2026}[str.~117--122]{garin2021}. Ločimo tri možne učinke, ki imajo v razčlenitvi~\eqref{eq:rast} različen \enquote{podpis}:
+\begin{itemize}
+    \item \textbf{(A) Višja stopnja investiranja $s$.} Vlaganja v R\&R in UI so del investicij, BLS pa jih šteje v kapital \parencite{bls2026tfp}. Višji $s$ dvigne $K/Y$ in raven BDP na delavca, rast pa le začasno \parencites[pros.~35,~47]{grobovsek2026}[str.~117--120]{garin2021}. V razčlenitvi se poveča prispevek $K/Y$, rast $A$ ostane enaka.
+    \item \textbf{(B) Enkraten dvig ravni produktivnosti $A$.} BDP v trenutku poskoči, kapital pa se nato postopno prilagaja; ob podvojitvi $A$ se BDP takoj poveča za faktor $2^{1-\alpha}\approx1{,}59$ \parencites[pros.~46]{grobovsek2026}[str.~120--122]{garin2021}. V razčlenitvi se pokaže kot enkraten skok rasti $A$, dolgoročna rast pa ostane enaka.
+    \item \textbf{(C) Trajno višja stopnja rasti tehnologije $g$.} BDP na delavca dolgoročno raste hitreje za $\Delta g$, razmerje $K/Y$ pa se po enačbi~\eqref{eq:ky} rahlo zniža. V razčlenitvi se trajno poveča rast $A$. To je edini od treh učinkov, ki trajno zviša rast.
+\end{itemize}
+
+Učinke smo številčno simulirali z enačbama~\eqref{eq:akum} in~\eqref{eq:prod} pri parametrih iz primera v razdelku~\ref{sec:bgp}. Gospodarstvo je do obdobja 0 na uravnoteženi poti, nato pa: (A) se $s$ poveča za 0,67 odstotne točke, kolikor se je povečal delež R\&R v BDP; (B) se $A$ enkrat poveča za 3~\%; (C) se $g$ trajno poveča z 2 na 2,5~\%.
+
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}
+\begin{axis}[
+    width=0.9\textwidth,
+    height=6cm,
+    xlabel={Obdobje},
+    ylabel={Rast BDP na delavca (\%)},
+    grid=major,
+    xmin=-2, xmax=30,
+    ymin=1.9, ymax=2.6,
+    legend pos=north east,
+    legend style={font=\footnotesize},
+    tick label style={font=\footnotesize},
+    label style={font=\footnotesize},
+    restrict y to domain=1.9:2.6
+]
+\addplot+[mark=none,thick,black,dashed] table[x=t,y=osnova,col sep=comma]{simulacija.csv};
+\addlegendentry{osnova}
+\addplot+[mark=none,thick,blue] table[x=t,y=A,col sep=comma]{simulacija.csv};
+\addlegendentry{(A) $s$ +0,67 o.\,t.}
+\addplot+[mark=none,thick,red] table[x=t,y=B,col sep=comma]{simulacija.csv};
+\addlegendentry{(B) $A$ +3~\%}
+\addplot+[mark=none,thick,teal] table[x=t,y=C,col sep=comma]{simulacija.csv};
+\addlegendentry{(C) $g$ +0,5 o.\,t.}
+\end{axis}
+\end{tikzpicture}
+\caption{Simulirana rast BDP na delavca v Solowovem modelu ob treh možnih učinkih UI}
+\caption*{\footnotesize Opomba: v scenariju (B) rast v obdobju 0 znaša 4,04~\% in je zaradi preglednosti izven prikaza. Vir: lastni izračun z enačbama~\eqref{eq:prod} in~\eqref{eq:akum}; parametri iz \cite[pros.~40]{grobovsek2026} in \cite[str.~18]{polanec_rast}.}
+\label{fig:simulacija}
+\end{figure}
+
+Simulacija pokaže velikostne razrede učinkov. Pri (A) se rast BDP na delavca v prvem letu poveča le za okoli 0,1 odstotne točke, nato pa se postopoma vrne na 2~\%; raven BDP na delavca je po 30 letih višja za okoli 1,4~\%, $K/Y$ pa naraste z 2,22 na 2,28. Pri (B) rast v obdobju dviga znaša 4,0~\%, nato pa je le za največ 0,06 odstotne točke nad osnovo. Pri (C) rast takoj naraste za $(1-\alpha)\cdot0{,}5\approx0{,}33$ odstotne točke in se nato približuje 2,5~\%, $K/Y$ pa pade proti 2,10 (lastni izračun). Učinek povečanja vlaganj v R\&R prek višjega $s$ je torej majhen in prehoden, trajno višjo rast pa prinese le višji $g$.
+
+\begin{table}[H]
+\centering
+\caption{Napovedi modela za tri možne učinke UI v razčlenitvi~\eqref{eq:rast}}\label{tab:napovedi}
+\small
+\renewcommand{\arraystretch}{1.15}
+\begin{tabularx}{\textwidth}{>{\raggedright\arraybackslash}p{3.4cm} >{\raggedright\arraybackslash}X >{\raggedright\arraybackslash}X >{\raggedright\arraybackslash}X}
+\toprule
+Učinek UI & Prispevek $K/Y$ & Rast $A$ & Dolgoročna rast BDP na delavca \\
+\midrule
+(A) višji $s$ & Začasno pozitiven & Nespremenjena & Nespremenjena, višja raven \\
+(B) enkraten dvig $A$ & Najprej negativen, nato pozitiven & Enkraten skok & Nespremenjena, višja raven \\
+(C) trajno višji $g$ & Rahlo negativen & Trajno višja & Višja za $\Delta g$ \\
+\bottomrule
+\end{tabularx}
+\caption*{\footnotesize Vir: lastna priprava na podlagi \cite[pros.~45--48,~59--61]{grobovsek2026} in simulacije na sliki~\ref{fig:simulacija}.}
+\end{table}
+
+% =================================================
+\section{Empirična aplikacija Solowovega modela}\label{sec:uporaba}
+% =================================================
+Cilj poglavja je napovedi iz razdelka~\ref{sec:uporabamodela} preveriti na podatkih za ZDA. Za vsako podobdobje rast BDP na uro dela razčlenimo po enačbi~\eqref{eq:rast} z $\alpha=1/3$, pri čemer je $L$ število opravljenih ur, $h$ pa kazalnik sestave delovne sile BLS. Model je dolgoročni model rasti, zato ne zajame recesije in pandemije; predavanje poudarja, da gospodarstvo navadno niha okoli svojega ustaljenega stanja \parencite[pros.~44,~49]{grobovsek2026}.
+
+\begin{table}[H]
+\centering
+\caption{Razčlenitev rasti BDP na uro dela po enačbi~\eqref{eq:rast} (povprečna letna rast v \%)}\label{tab:obdobja}
+\footnotesize
+\renewcommand{\arraystretch}{1.15}
+\begin{tabularx}{\textwidth}{>{\raggedright\arraybackslash}p{5.6cm} *{3}{>{\centering\arraybackslash}X}}
+\toprule
+ & 2010--2014 & 2015--2019 & 2020--2025 \\
+\midrule
+BDP na uro dela $g_y$ & 1,10 & 1,44 & 2,23 \\
+\quad prispevek produktivnosti $g_A$ & 1,22 & 1,10 & 1,71 \\
+\quad prispevek razmerja $K/Y$: $0{,}5\,g_{K/Y}$ & $-0{,}48$ & $-0{,}06$ & $-0{,}05$ \\
+\quad prispevek človeškega kapitala $g_h$ & 0,36 & 0,40 & 0,56 \\
+\midrule
+Kontrola: $g_{\mathrm{TFP}}/(1-\alpha)$ po BLS & 1,22 & 1,02 & 1,55 \\
+Delež R\&R v BDP (povprečje) & 2,70 & 2,86 & 3,37\textsuperscript{a} \\
+\bottomrule
+\end{tabularx}
+\caption*{\footnotesize Opombe: $\alpha=1/3$. \textsuperscript{a}2020--2023. Rast $K/Y$ izračunamo iz zaokroženih letnih sprememb vložka kapitala in outputa. Vir: \cite{fredtfp}; slika~\ref{fig:rnd}; lastni izračun.}
+\end{table}
+
+Izmerjena produktivnost se z uradno TFP ujema v prvem podobdobju natančno, v drugih dveh pa razlika ne presega 0,16 odstotne točke, ker BLS uporablja dejanske deleže stroškov kapitala. Razmerje $K/Y$ je bilo v drugem in tretjem podobdobju skoraj konstantno, kot ga model napoveduje za uravnoteženo pot.
+
+\subsection{Prvo obdobje: od 2010 do 2014}
+\textbf{Uporaba modela:}
+\begin{itemize}
+    \item \textbf{Vložki:} delež R\&R v BDP je bil stabilen (2,67--2,73~\%), zato model ne napove spremembe $s$ zaradi vlaganj v R\&R.
+    \item \textbf{Razčlenitev (enačba~\eqref{eq:rast}):} BDP na uro je rasel po 1,10~\%, od tega 1,22 odstotne točke zaradi produktivnosti, 0,36 zaradi človeškega kapitala in $-0{,}48$ zaradi upadanja $K/Y$ za 0,96~\% na leto.
+\end{itemize}
+
+\textbf{Primerjava z modelom:} upadanje $K/Y$ je skladno s prehodno dinamiko modela. Med recesijo leta 2009 je BDP padel bolj kot kapital, zato je bilo razmerje $K/Y$ nad uravnoteženo vrednostjo; ko je kapital večji od ustaljene vrednosti, raste počasneje od BDP, dokler se razmerje ne vrne na uravnoteženo pot \parencite[pros.~30,~56--57]{grobovsek2026}.
+
+\textbf{Kritična presoja specifičnosti prvega obdobja:} prispevek produktivnosti vključuje odboj leta 2010, ko je izmerjena $A$ zrasla za okoli 4~\%. Brez tega leta bi bila rast $A$ v letih 2010--2014 le okoli 0,54~\% na leto (lastni izračun). Gre za kratkoročna ciklična gibanja izkoriščenosti zmogljivosti, ki jih dolgoročni model ne pojasni in se v ostanku pokažejo kot produktivnost. Podatkov o vlaganjih v UI in UI-patentih za to obdobje nimamo.
+
+\subsection{Drugo obdobje: od 2015 do 2019}
+\textbf{Uporaba modela:}
+\begin{itemize}
+    \item \textbf{Vložki:} delež R\&R v BDP je narasel na 2,86~\% (za 0,16 odstotne točke). Po simulaciji iz razdelka~\ref{sec:uporabamodela} bi takšen dvig $s$ v prvem letu povečal rast le za okoli 0,02 odstotne točke (lastni izračun), $K/Y$ pa bi rahlo naraščal.
+    \item \textbf{Razčlenitev:} BDP na uro je pospešil na 1,44~\%; produktivnost je prispevala 1,10, človeški kapital 0,40, razmerje $K/Y$ pa le še $-0{,}06$ odstotne točke.
+\end{itemize}
+
+\textbf{Primerjava z modelom:} gospodarstvo je bilo blizu uravnotežene poti: $K/Y$ je bil skoraj konstanten in rast BDP na uro je bila približno enaka $g+g_h$, kot napoveduje enačba~\eqref{eq:rast}. Pospešek glede na prvo obdobje ni posledica hitrejše rasti produktivnosti, temveč konca upadanja $K/Y$ po recesiji. Znakov učinka (A) ni, saj $K/Y$ ni naraščal, prav tako ne učinka (C), saj se rast $A$ ni povečala.
+
+\textbf{Kritična presoja specifičnosti drugega obdobja:} kljub naraščajočim vlaganjem v R\&R rast produktivnosti ni pospešila. To je skladno z ugotovitvijo iz predavanj, da je rast produktivnosti v ZDA ostala približno nespremenjena kljub hitremu povečevanju števila raziskovalcev, kar nekateri razlagajo kot znak, da postaja ustvarjanje novih idej vse težje (Bloom in sod., 2020, povzeto po \cite[pros.~136--137]{grobovsek2026}). Učbenik opisuje dolgoročno upočasnitev rasti produktivnosti v ZDA od zgodnjih 1970-ih let \parencite[str.~129]{garin2021}. Model teh pojavov ne pojasni, saj je $g$ v njem eksogen. O UI-patentih imamo v tem obdobju le podatek za leto 2018.
+
+\subsection{Tretje obdobje: od 2020 do 2025}
+\textbf{Uporaba modela:}
+\begin{itemize}
+    \item \textbf{Vložki:} delež R\&R v BDP je znašal 3,37~\% (za 0,51 odstotne točke več kot v drugem obdobju). Federalna vlaganja v UI R\&R so se med FY2020 in FY2023 več kot podvojila, zasebne naložbe v UI so leta 2024 dosegle 109,1 milijarde USD \parencite{aiindex2025}, UI-patentne prijave pa so se med letoma 2018 in 2023 povečale za 33~\% \parencite{pairolero2025}.
+    \item \textbf{Napoved učinka (A):} dvig $s$ za 0,51 odstotne točke bi po simulaciji v prvem letu povečal rast BDP na delavca za okoli 0,08 odstotne točke (lastni izračun).
+    \item \textbf{Razčlenitev:} BDP na uro je pospešil na 2,23~\%; produktivnost je prispevala 1,71, človeški kapital 0,56, razmerje $K/Y$ pa $-0{,}05$ odstotne točke. Rast $A$ se je glede na drugo obdobje povečala za 0,61 odstotne točke.
+\end{itemize}
+
+\textbf{Primerjava z modelom:} od pospeška rasti BDP na uro za 0,79 odstotne točke lahko učinek (A) pojasni največ okoli 0,08, saj $K/Y$ ni naraščal. Večina pospeška izvira iz rasti produktivnosti, preostanek pa iz človeškega kapitala. Po modelu je to mogoče le z učinkom (B) ali (C), torej s hitrejšim tehnološkim napredkom. Rast UI-patentov in zasebnih naložb v UI je s tem skladna, ne dokazuje pa, da je vzrok UI.
+
+\textbf{Ali gre za (B) ali (C)?} V letih 2023--2025 je izmerjena produktivnost $A$ rasla po 2,67~\%, 2,57~\% in 1,51~\%, v povprečju 2,25~\% na leto, kar je več kot dvakrat več od povprečja drugega obdobja (1,10~\%) (lastni izračun). Po simulaciji bi učinek (C) pomenil trajno višjo rast, učinek (B) pa le kratkotrajno. Tri leta in znižanje rasti leta 2025 ne zadoščajo, da bi ju ločili; enkraten dvig ravni tehnologije, ki se v gospodarstvu širi postopoma, se lahko več let kaže kot višja rast.
+
+\textbf{Kritična presoja specifičnosti tretjega obdobja:} pandemija je povzročila velika nihanja: kazalnik sestave delovne sile je leta 2020 poskočil za 2,8~\%, izmerjena produktivnost pa je leta 2021 zrasla za okoli 5,6~\% in leta 2022 padla za okoli 1,8~\% (lastni izračun). Teh premikov model ne zajame. Ker je produktivnost ostanek, vsebuje tudi napake merjenja kakovosti dela \parencite[str.~23--24]{polanec_rast}. Splošnonamenske tehnologije se v produktivnosti pokažejo z zamikom, saj zahtevajo komplementarne investicije in učenje \parencite[str.~28]{polanec_rast}, zato je obdobje za presojo dolgoročnega učinka UI prekratko.
+
+% =================================================
+\section{Kritična presoja in zaključek}\label{sec:zakljucek}
+% =================================================
+
+\subsection{Odgovor na raziskovalno vprašanje}
+Raziskovalno vprašanje je bilo: ali je rast produktivnosti v ZDA v obdobju 2010--2025, ko so se povečala vlaganja v raziskave in razvoj ter umetno inteligenco, skladna s Solowovim modelom, po katerem višja vlaganja zvišajo raven proizvodnje, trajno višjo rast pa prinese le hitrejši tehnološki napredek?
+
+Odgovor po podvprašanjih je naslednji. (1) Vlaganja so se povečala: delež R\&R v BDP je narasel za 0,67 odstotne točke, federalna vlaganja v UI so se več kot podvojila, zasebne naložbe v UI pa so leta 2024 dosegle 109,1 milijarde USD. (2) Rast BDP na uro dela se je povečala z 1,10~\% na 2,23~\% na leto. Razmerje $K/Y$ je po upadu v prvem obdobju ostalo skoraj konstantno, zato rast v drugem in tretjem obdobju skoraj v celoti pojasnita produktivnost in človeški kapital. (3) Rast produktivnosti se je v tretjem obdobju povečala za okoli 0,6 odstotne točke, vendar je obdobje prekratko, da bi ugotovili, ali je povečanje trajno.
+
+Podatki so z modelom skladni. Kot napoveduje model, se je razmerje $K/Y$ ob uravnoteženi rasti gibalo skoraj konstantno, višja vlaganja v R\&R pa so po simulaciji lahko prispevala manj kot 0,1 odstotne točke dodatne rasti na leto. Pospešek po letu 2019 lahko model pojasni le s hitrejšim tehnološkim napredkom, ki pa ga ne pojasni, temveč privzame.
+
+\subsection{Kaj model pojasni in česa ne}
+Model dobro pojasni razliko med učinki na raven in na rast, prehodno upadanje $K/Y$ po recesiji ter to, zakaj samo povečanje vlaganj v R\&R ne more bistveno zvišati rasti. Ne pojasni pa vira tehnološkega napredka, saj je $g$ eksogen \parencites[pros.~61]{grobovsek2026}[str.~18]{polanec_rast}, zato ne more odgovoriti, ali je UI povečala $g$. To vprašanje obravnava teorija endogene rasti, v kateri ideje nastajajo z investicijami v R\&R, ki so odvisne od izključljivosti, njihov učinek pa krepijo eksternalije oziroma tehnološki prelivi; osnovna okvira sta modela Romerja (1990) ter Aghiona in Howitta (1992) \parencite[pros.~122--128]{grobovsek2026}. Takšen model bi bil naravna razširitev naše analize. Solowov model predpostavlja tudi eksogeno stopnjo varčevanja, saj gospodinjstvo ničesar ne optimizira \parencite[pros.~86]{grobovsek2026}, in zaprto gospodarstvo, čeprav se znanje širi med državami in tuje R\&R vpliva na domačo produktivnost \parencite[str.~31--32]{polanec_rast}.
+
+\subsection{Omejitve in zaključek}
+Analiza je opisna, temelji le na treh podobdobjih in ne omogoča ocene vzročnega učinka. Razčlenitev predpostavlja stalen delež kapitala $\alpha=1/3$, produktivnost pa je ostanek, ki vsebuje napake merjenja, ciklično izkoriščenost zmogljivosti in druge dejavnike \parencite[str.~23--24]{polanec_rast}. Rast $K/Y$ smo izračunali iz zaokroženih letnih podatkov. Delež R\&R v BDP velja za celotno gospodarstvo, podatki BLS pa za zasebni nekmetijski poslovni sektor. Vlaganja v R\&R in UI so v vložku kapitala skrita med drugimi investicijami, UI-patenti pa merijo le formalizirano in deloma tuje znanje. Generativna UI je razširjena šele od konca leta 2022.
+
+Solowov model nam pomaga razumeti, da UI dolgoročno rast lahko zviša le, če trajno pospeši tehnološki napredek, ne pa zgolj s tem, da poveča vlaganja. Podatki za ZDA kažejo, da je rast produktivnosti po letu 2019 pospešila, kar je skladno s takšnim učinkom, a še ne dokazuje, da je trajen. Ali bo UI kot makro inovacija ovrgla oceno, da nam zmanjkuje idej \parencite[pros.~136--139]{grobovsek2026}, bo mogoče presoditi šele z daljšimi časovnimi vrstami.
+
+\newpage
+\printbibliography[title={Literatura in viri}, heading=bibintoc]
+
+\end{document}
