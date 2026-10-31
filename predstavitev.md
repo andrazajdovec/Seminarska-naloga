@@ -21,7 +21,7 @@ Lep pozdrav. Smo Andraž Ajdovec, Tin Cvek, Jan Hrovat in Miha Ručigaj. Predsta
 
 **Prosojnica 2 – motivacija in raziskovalno vprašanje**
 
-Že majhne razlike v stopnji rasti so pomembne: ena odstotna točka višja rast v štiridesetih letih pomeni približno 49 odstotkov višji dohodek na prebivalca. Po Solowovem modelu BDP na delavca dolgoročno raste le s tehnološkim napredkom, ta pa izvira iz idej, ki nastajajo z raziskavami in razvojem. Umetna inteligenca bi lahko bila nov vir idej, ocene njenega učinka pa se zelo razlikujejo. Acemoglu na primer ocenjuje, da bo letno rast skupne faktorske produktivnosti v ZDA zvišala le za okoli 0,06 odstotne točke. ZDA smo izbrali, ker imajo največ raziskav in razvoja ter zasebnih naložb v UI in ker so na tehnološki meji.
+Že majhne razlike v stopnji rasti so pomembne: če je letna rast višja za eno odstotno točko, je dohodek na prebivalca po 40 letih višji za približno 49 odstotkov. Po Solowovem modelu BDP na delavca dolgoročno raste le s tehnološkim napredkom, ta pa izvira iz idej, ki nastajajo z raziskavami in razvojem. Umetna inteligenca bi lahko bila nov vir idej, ocene njenega učinka pa se zelo razlikujejo. Acemoglu na primer ocenjuje, da bo letno rast skupne faktorske produktivnosti v ZDA zvišala le za okoli 0,06 odstotne točke. ZDA smo izbrali, ker imajo največ raziskav in razvoja ter zasebnih naložb v UI in ker so na tehnološki meji.
 
 Naše raziskovalno vprašanje je: ali je pospešek rasti produktivnosti v ZDA v obdobju od 2010 do 2025 po Solowovem modelu posledica višjih investicij ali hitrejšega tehnološkega napredka in ali ga lahko pripišemo umetni inteligenci? Obdobje smo razdelili na tri podobdobja, zadnje pa še na leta pandemije in leta po izidu ChatGPT.
 
