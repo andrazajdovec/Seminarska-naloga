@@ -27,7 +27,7 @@ Naše raziskovalno vprašanje je: ali je pospešek rasti produktivnosti v ZDA v 
 
 **Prosojnica 3 – ključni podatki (slika 1, tabela 2)**
 
-Iz podatkov za ZDA izstopajo tri ugotovitve. Prvič, delež izdatkov za raziskave in razvoj v BDP je bil do leta 2015 okoli 2,7 odstotka, leta 2023 pa 3,38 odstotka, kar pomeni približno četrtino večji del proizvodnje kot pred desetletjem. Drugič, celotna stopnja investicij se je ustalila pri okoli 18 odstotkih BDP torej se delež proizvodnje, ki gre v nov kapitalv zadnjih letih skoraj ni spremenil. In tretjič, vlaganja vlade ZDA v UI so se med letoma 2020 in 2023 več kot podvojila, zasebne naložbe pa so leta 2024 dosegle 109 milijard dolarjev torej večino denarja za UI prispeva zasebni sektor.
+Iz podatkov za ZDA izstopajo tri ugotovitve. Prvič, delež izdatkov za raziskave in razvoj v BDP je bil do leta 2015 okoli 2,7 odstotka, leta 2023 pa 3,38 odstotka, kar pomeni približno četrtino večji del proizvodnje kot pred desetletjem. Drugič, celotna stopnja investicij se je ustalila pri okoli 18 odstotkih BDP torej se delež proizvodnje, ki gre v nov kapitalv zadnjih letih skoraj ni spremenil. In tretjič, vlaganja vlade ZDA v UI so se med letoma 2020 in 2023 več kot podvojila in tako dosegle 3,1 milijarde, zasebne naložbe pa so leta 2024 dosegle 109 milijard dolarjev torej večino denarja za UI prispeva zasebni sektor.
 
 BDP na uro dela je v treh podobdobjih rasel po 1,1, 1,4 in 2,2 odstotka na leto. Ali je pospešek posledica investicij ali tehnologije, nam pove model, ki ga bo predstavil Tin.
 
