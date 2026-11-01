@@ -17,7 +17,7 @@ Imena so razporejena po abecedi, zamenjajte jih po želji. Besedila ne berite do
 
 **Prosojnica 1 – naslov**
 
-Lep pozdrav. Smo Andraž Ajdovec, Tin Cvek, Jan Hrovat in Miha Ručigaj. Predstavili bomo seminarsko nalogo Umetna inteligenca kot vir raziskav in razvoja ter dolgoročne gospodarske rasti: ZDA v obdobju od 2010 do 2025.
+Lep pozdrav. Smo Andraž, Tin, Jan in Miha. Danes vam bomo predstavili kako je umetna inteligenca kot vir povezana z raziskavami in razvojem ter dolgoročno gospodarsko rastjo in sicer ZDA v obdobju od 2010 do 2025.
 
 **Prosojnica 2 – motivacija in raziskovalno vprašanje**
 
